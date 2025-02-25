@@ -1,19 +1,16 @@
-import express, { NextFunction, Request, Response } from "express";
-import { ValidationError } from "../errors/validation.error";
-import { NotFoundError } from "../errors/not-found.error";
+import express, { Request, Response, NextFunction } from "express";
+import { InternalServerError } from "../errors/internal-server.error";
 import { errors } from "celebrate";
+import { ErrorBase } from "../errors/base.error";
 
 export const errorHandler = (app: express.Express) => {
-  app.use(errors());
-  app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
-    if(error instanceof ValidationError) {
-      error.send(res)
-    } else if(error instanceof NotFoundError) {
-      error.send(res)
-    }else{
-      res.status(500).send({
-        message: "Erro Interno do Servidor"
-      })
-    }
-  })
-}
+    app.use(errors());
+    app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
+        console.log(error);
+        if (error instanceof ErrorBase) {
+            error.send(res);
+        } else {
+            new InternalServerError().send(res);
+        }
+    });
+};
