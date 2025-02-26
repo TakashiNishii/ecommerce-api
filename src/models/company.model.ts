@@ -19,7 +19,7 @@ export const newCompanySchema = {
   cpfCnpj: Joi.alternatives().try(
     Joi.string().length(11),
     Joi.string().length(14)
-  ),
+  ).required(),
   razaoSocial: Joi.string().required(),
   nomeFantasia: Joi.string().required(),
   telefone: Joi.string().regex(/(^[1-9]{1}[0-9]{1}[0-9]{8}$)|(^[1-9]{1}[0-9]{1}[9]{1}[0-9]{8}$)/).required(),
@@ -31,11 +31,14 @@ export const newCompanySchema = {
 }
 
 export const updateCompanySchema = {
-  logomarca: Joi.string().base64().required(),
+  logomarca: Joi.alternatives().try(
+    Joi.string().base64().required(),
+    Joi.string().uri().required(),
+  ).required(),
   cpfCnpj: Joi.alternatives().try(
     Joi.string().length(11),
     Joi.string().length(14)
-  ),
+  ).required(),
   razaoSocial: Joi.string().required(),
   nomeFantasia: Joi.string().required(),
   telefone: Joi.string().regex(/(^[1-9]{1}[0-9]{1}[0-9]{8}$)|(^[1-9]{1}[0-9]{1}[9]{1}[0-9]{8}$)/).required(),
