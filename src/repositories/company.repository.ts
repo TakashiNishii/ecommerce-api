@@ -40,4 +40,5 @@ export class CompanyRepository {
         delete company.id;
         await docRef.set(company);
     }
+
 }

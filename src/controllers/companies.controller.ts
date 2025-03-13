@@ -1,4 +1,4 @@
-import {Request, Response } from "express";
+import { Request, Response } from "express";
 import { Company } from "../models/company.model.js";
 import { CompanyService } from "../services/company.service.js";
 
@@ -27,4 +27,5 @@ export class CompaniesController {
             message: "Empresa alterada com sucesso!"
         });
     }
+
 }

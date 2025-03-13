@@ -11,8 +11,7 @@ initializeFirebaseApp({
     apiKey: process.env.API_KEY
 });
 const app = express();
-
-auth(app)
+auth(app);
 routes(app);
 pageNotFoundHandler(app);
 errorHandler(app);
